@@ -12,7 +12,7 @@ workbox.routing.registerRoute(
     request.destination === 'style' ||
     request.destination === 'script' ||
     request.destination === 'worker',
-  new workbox.strategies.StaleWhileRevalidate({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'assets',
   }),
 );
