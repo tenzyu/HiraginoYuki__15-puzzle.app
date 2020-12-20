@@ -30583,9 +30583,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fifteen-puzzle */ "./src/fifteen-puzzle/index.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils/index.ts");
+/* harmony import */ var _serviceWorker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./serviceWorker */ "./src/serviceWorker.ts");
 
 
 
+
+_serviceWorker__WEBPACK_IMPORTED_MODULE_3__.register();
 (0,_utils__WEBPACK_IMPORTED_MODULE_2__.defineOnGlobal)({ FifteenPuzzle: _fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__.FifteenPuzzle });
 function App() {
     var puzzle = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__.FifteenPuzzle.generateRandom(4))[0];
@@ -30791,8 +30794,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./src/utils/index.ts");
-/* harmony import */ var _swr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./swr */ "./src/swr.js");
-
 
 
 
@@ -30800,7 +30801,92 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_utils__WEBPACK_IMPORTED_MODULE_4__.disableScroll)();
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(_app__WEBPACK_IMPORTED_MODULE_2__.App, null), document.getElementById("app"));
-_swr__WEBPACK_IMPORTED_MODULE_5__.register();
+
+
+/***/ }),
+
+/***/ "./src/serviceWorker.ts":
+/*!******************************!*\
+  !*** ./src/serviceWorker.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "register": () => /* binding */ register,
+/* harmony export */   "unregister": () => /* binding */ unregister
+/* harmony export */ });
+var isLocalhost = Boolean(window.location.hostname === "localhost" ||
+    window.location.hostname === "[::1]" ||
+    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
+function register(config) {
+    if (false) { var publicUrl; }
+}
+function registerValidSW(swUrl, config) {
+    navigator.serviceWorker
+        .register(swUrl)
+        .then(function (registration) {
+        registration.onupdatefound = function () {
+            var installingWorker = registration.installing;
+            if (installingWorker == null) {
+                return;
+            }
+            installingWorker.onstatechange = function () {
+                if (installingWorker.state === "installed") {
+                    if (navigator.serviceWorker.controller) {
+                        console.log("New content is available and will be used when all tabs for this page are closed.");
+                        if (config && config.onUpdate) {
+                            config.onUpdate(registration);
+                        }
+                    }
+                    else {
+                        console.log("Content is cached for offline use.");
+                        if (config && config.onSuccess) {
+                            config.onSuccess(registration);
+                        }
+                    }
+                }
+            };
+        };
+    })
+        .catch(function (error) {
+        console.error("Error during service worker registration:", error);
+    });
+}
+function checkValidServiceWorker(swUrl, config) {
+    fetch(swUrl, {
+        headers: { "Service-Worker": "script" },
+    })
+        .then(function (response) {
+        var contentType = response.headers.get("content-type");
+        if (response.status === 404 ||
+            (contentType != null && contentType.indexOf("javascript") === -1)) {
+            navigator.serviceWorker.ready.then(function (registration) {
+                registration.unregister().then(function () {
+                    window.location.reload();
+                });
+            });
+        }
+        else {
+            registerValidSW(swUrl, config);
+        }
+    })
+        .catch(function () {
+        console.log("No internet connection found. App is running in offline mode.");
+    });
+}
+function unregister() {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.ready
+            .then(function (registration) {
+            registration.unregister();
+        })
+            .catch(function (error) {
+            console.error(error.message);
+        });
+    }
+}
 
 
 /***/ }),
@@ -31110,100 +31196,6 @@ function useForceUpdate() {
     return function () { return setValue(function (value) { return value + 1; }); };
 }
 
-
-/***/ }),
-
-/***/ "./src/swr.js":
-/*!********************!*\
-  !*** ./src/swr.js ***!
-  \********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "register": () => /* binding */ register,
-/* harmony export */   "unregister": () => /* binding */ unregister
-/* harmony export */ });
-const isLocalhost = Boolean(
-    window.location.hostname === 'localhost' ||
-      window.location.hostname === '[::1]' ||
-      window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
-  );
-  
-  function register(config) {
-    if (false) {}
-  }
-  
-  function registerValidSW(swUrl, config) {
-    navigator.serviceWorker
-      .register(swUrl)
-      .then((registration) => {
-        registration.onupdatefound = () => {
-          const installingWorker = registration.installing;
-          if (installingWorker == null) {
-            return;
-          }
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
-                console.log(
-                  'New content is available and will be used when all ' +
-                    'tabs for this page are closed.'
-                );
-                if (config && config.onUpdate) {
-                  config.onUpdate(registration);
-                }
-              } else {
-                console.log('Content is cached for offline use.');
-                if (config && config.onSuccess) {
-                  config.onSuccess(registration);
-                }
-              }
-            }
-          };
-        };
-      })
-      .catch((error) => {
-        console.error('Error during service worker registration:', error);
-      });
-  }
-  
-  function checkValidServiceWorker(swUrl, config) {
-    fetch(swUrl, {
-      headers: { 'Service-Worker': 'script' },
-    })
-      .then((response) => {
-        const contentType = response.headers.get('content-type');
-        if (
-          response.status === 404 ||
-          (contentType != null && contentType.indexOf('javascript') === -1)
-        ) {
-          navigator.serviceWorker.ready.then((registration) => {
-            registration.unregister().then(() => {
-              window.location.reload();
-            });
-          });
-        } else {
-          registerValidSW(swUrl, config);
-        }
-      })
-      .catch(() => {
-        console.log('No internet connection found. App is running in offline mode.');
-      });
-  }
-  
-  function unregister() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.ready
-        .then((registration) => {
-          registration.unregister();
-        })
-        .catch((error) => {
-          console.error(error.message);
-        });
-    }
-  }
 
 /***/ })
 
