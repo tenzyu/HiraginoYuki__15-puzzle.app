@@ -1,50 +1,41 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js');
-import { registerRoute } from 'workbox.routing';
-import {
-  NetworkFirst,
-  StaleWhileRevalidate,
-  CacheFirst,
-} from 'workbox.strategies';
 
-import { CacheableResponsePlugin } from 'workbox.cacheable.response';
-import { ExpirationPlugin } from 'workbox.expiration';
-
-registerRoute(
+workbox.routing.registerRoute(
   ({ request }) => request.mode === 'navigate',
-  new NetworkFirst({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'pages',
     plugins: [
-      new CacheableResponsePlugin({
+      new workbox.cacheable.response.CacheableResponsePlugin({
         statuses: [200],
       }),
     ],
   }),
 );
 
-registerRoute(
+workbox.routing.registerRoute(
   ({ request }) =>
     request.destination === 'style' ||
     request.destination === 'script' ||
     request.destination === 'worker',
-  new StaleWhileRevalidate({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'assets',
     plugins: [
-      new CacheableResponsePlugin({
+      new workbox.cacheable.response.CacheableResponsePlugin({
         statuses: [200],
       }),
     ],
   }),
 );
 
-registerRoute(
+workbox.routing.registerRoute(
   ({ request }) => request.destination === 'image',
-  new CacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: 'images',
     plugins: [
-      new CacheableResponsePlugin({
+      new workbox.cacheable.response.CacheableResponsePlugin({
         statuses: [200],
       }),
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 50,
         maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
       }),
