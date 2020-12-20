@@ -30588,7 +30588,7 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_utils__WEBPACK_IMPORTED_MODULE_2__.defineOnGlobal)({ FifteenPuzzle: _fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__.FifteenPuzzle });
 function App() {
-    var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__.FifteenPuzzle.generateRandom(4)), puzzle = _a[0], setPuzzle = _a[1];
+    var puzzle = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_fifteen_puzzle__WEBPACK_IMPORTED_MODULE_1__.FifteenPuzzle.generateRandom(4))[0];
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () { return (0,_utils__WEBPACK_IMPORTED_MODULE_2__.defineOnGlobal)({ puzzle: puzzle }); });
     return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils__WEBPACK_IMPORTED_MODULE_2__.FlexCenteringContainer, null,
